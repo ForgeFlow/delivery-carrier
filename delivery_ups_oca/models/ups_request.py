@@ -79,7 +79,7 @@ class UpsRequest(object):
             },
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(package.length),
+                "Length": str(package.packaging_length),
                 "Width": str(package.width),
                 "Height": str(package.height),
             },
