@@ -85,6 +85,12 @@ class DeliveryCarrier(models.Model):
         "webservice (you will necessary to activate tracking API)",
     )
     ups_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
+    ups_authcode_url = fields.Char(compute="_compute_ups_authcode_url")
+
+    def _compute_ups_authcode_url(self):
+        self.ensure_one()
+        ups_request = UpsRequest(self)
+        self.ups_authcode_url = ups_request.oauth_validate_client()
 
     def ups_test_call(self, order):
         self.ensure_one()

@@ -285,3 +285,10 @@ class UpsRequest(object):
             "delivery_state": static_states.get(state, "incidence"),
             "tracking_state_history": state,
         }
+
+    def _validate_client(self, picking):
+        status = self._process_reply(
+            url="%s/security/v1/oauth/validate-client" % self.url,
+            data={},
+        )
+        return status
