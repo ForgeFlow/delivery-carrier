@@ -1,4 +1,0 @@
-- [Sygel](https://www.sygel.es):
-  - Alberto Martínez
-  - Jaime Ruiz Maccione
-  - Valentin Vinagre

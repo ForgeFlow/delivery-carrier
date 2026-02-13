@@ -8,19 +8,14 @@ class StockPicking(models.Model):
 
     # Needed for fields.Monetary
     currency_id = fields.Many2one(
-        comodel_name="res.currency",
+        related="sale_id.currency_id",
+        readonly=True,
         string="Currency",
-        compute="_compute_currency_id",
-        compute_sudo=True,  # for avoiding access problems
+        related_sudo=True,  # for avoiding access problems
     )
     carrier_price_for_report = fields.Monetary(
         compute="_compute_carrier_price_for_report",
     )
-
-    @api.depends("sale_id", "sale_id.currency_id", "company_id")
-    def _compute_currency_id(self):
-        for item in self:
-            item.currency_id = item.sale_id.currency_id or item.company_id.currency_id
 
     @api.depends("sale_id", "carrier_price")
     def _compute_carrier_price_for_report(self):
